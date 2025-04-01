@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ./node-ts
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./node-ts:/app
+      - /app/node_modules
+    depends_on:
+      - postdb
+  
+  postdb:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: n9Hb3bOrVoF4pGKw
+      POSTGRES_USER: admin
+      POSTGRES_DB: todos
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+    
+
+volumes:
+  pgdata:  
